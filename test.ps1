@@ -1,5 +1,6 @@
 param (
-    [string]$myParameter
+    [string]$myParameter,
+    [string]$region
 )
 
 Write-Host "My Parameter: $myParameter"
