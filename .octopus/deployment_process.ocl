@@ -28,6 +28,7 @@ step "run-a-s" {
 
     action {
         action_type = "Octopus.Script"
+        environments = ["development"]
         properties = {
             Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptFileName = "test.ps1"
