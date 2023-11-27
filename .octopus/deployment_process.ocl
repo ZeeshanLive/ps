@@ -1,0 +1,46 @@
+step "hello-world-using-powershell" {
+    name = "Hello world (using PowerShell)"
+
+    action {
+        action_type = "Octopus.Script"
+        is_disabled = true
+        is_required = true
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Host 'Hello world, using PowerShell'
+                
+                #TODO: Experiment with steps of your own :)
+                
+                Write-Host '[Learn more about the types of steps available in Octopus](https://oc.to/OnboardingAddStepsLearnMore)'
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+    }
+}
+
+step "run-a-s" {
+    name = "Run a S"
+    properties = {
+        Octopus.Action.TargetRoles = "asa"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptFileName = "test.ps1"
+            Octopus.Action.Script.ScriptParameters = "-myParameter \"#{MyParameter}\""
+            Octopus.Action.Script.ScriptSource = "GitRepository"
+        }
+        worker_pool_variable = ""
+
+        git_dependencies {
+            default_branch = "main"
+            git_credential_id = "GitCredentials-1"
+            git_credential_type = "Library"
+            repository_uri = "https://github.com/ZeeshanLive/ps.git"
+        }
+    }
+}
