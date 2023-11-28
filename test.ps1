@@ -1,8 +1,8 @@
 param (
-    [string]$myParameter,
+    [string]$bucket,
     [string]$region
 )
 
-Write-Host "My Parameter: $myParameter"
-Write-Host "My regio: $region"
+Write-Host "My bucket: $bucket"
+Write-Host "My region: $region"
 # Rest of your script
